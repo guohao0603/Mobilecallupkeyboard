@@ -1,7 +1,4 @@
- 
-
-
- html {
+  html {
             font-family: sans-serif;
             -ms-text-size-adjust: 100%;
             -webkit-text-size-adjust: 100%
@@ -13,7 +10,7 @@
             margin: 0;
             background-color: #efeff4
         }
-        /* ËÑË÷¿òÑùÊ½ */
+        /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½ */
         .search {
             display: -webkit-box;
             display: -webkit-flex;
@@ -22,6 +19,7 @@
             padding: .4rem;
             position: relative;
             background-color: #fff;
+            overflow-x: hidden;
         }
         .search-box {
             -webkit-box-flex: 1;
@@ -128,7 +126,7 @@
         }
 
 
-        /* ½»»¥UiÑùÊ½ */
+        /* ï¿½ï¿½ï¿½ï¿½Uiï¿½ï¿½Ê½ */
         .entry-head {
             background-color: #fff;
         }
