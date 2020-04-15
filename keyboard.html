@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>移动端呼起键盘</title>
+    <link rel="stylesheet" href="./search.css">
+</head>
+<body>
+    <div id="search_bar" class="search search_dark" style="display: none;">
+            <div id="search_box" class="search-box">
+                <i class="icon-search"></i>
+                <span class="search-text">搜索话题</span>
+                <form style="width:100%;" onsubmit="return false"><input style="width:100%;box-sizing: border-box;" id="j_input" type="search" class="search__input" placeholder="搜索话题"></form>
+                <span style="display: none;" id="j_clear" class="search__icon_cancel">
+                <i></i>
+                </span>
+            </div>
+            <a id="j_refer" class="search__cancel-button" style="display: none;">取消</a>
+        </div>
+        <div id="top_header" class="entry-head entry-head_c" style="margin-bottom: 0.3rem;">
+            <div class="entry-head__title ui-bb_1px">
+                <img id="group_icon" alt="game_icon" class="entry-head__game-logo" src="http://mmocgame.qpic.cn/wechatgame/mEMdfrX5RU3skibAqt732QvILol4OibMRRNbbdrZFvtZHAdTbYzAYsQGet4K7Lr7jD/0">
+                <div class="entry-head__action">
+                    <div id="profile_me" class="entry-head__action-profile _js_jumpProfile" open_id="g1NlbyqjE3w4ec_3_aGsmmMbZg2U"><i></i></div>
+                    <div id="j_search_btn" class="entry-head__action-search">
+                        <label id="j_input_label" class="entry-head__action-input"></label>
+                    </div>
+                </div>
+                <div id="j_game_name_div" class="entry-head__game-name _js_jumpMoreCircle"><span id="group_name" class="">王者荣耀</span></div>
+            </div>
+        </div>
+            
+       
+        <script type="text/javascript">
+            (function  () {
+                var isAndroid = /android/i.test(navigator.userAgent);
+                var isIos = /(ios|ipad|iphone)/i.test(navigator.userAgent);
+                var invisibleInputID = 'j_inputs';
+               
+                function $(id){
+                    return document.getElementById(id);
+                }
+                var _input = $('j_input');
+                var btn = $('j_input_label');
+                var cancleBtn = $('j_refer');
+
+                function createInvisibleInput () {
+                    var input = document.createElement('input');
+                    input.type = 'text';
+                    input.style.cssText = 'display:block;position: absolute;z-index: 999;left:0;top:0';
+                    input.id = invisibleInputID;
+                    document.body.appendChild(input);
+                }
+                if(isAndroid){
+                    // createInvisibleInput();
+                    // $('j_input_label').setAttribute('for', invisibleInputID);
+                }
+                cancleBtn.addEventListener('click', function(evt){
+                    _input.blur();
+                    document.getElementById('search_bar').className = 'search search_dark';
+                    _input.value = '';
+                    document.getElementById('search_bar').style.display = 'none';
+                    $('top_header').style.display = '';
+                    this.style.display = 'none';
+                    evt.stopPropagation();
+                });
+
+                btn.addEventListener('touchstart', function(evt){
+                    if(isIos){
+                        evt.preventDefault();
+                        evt.stopPropagation();
+                        controlUI();
+                    }else{
+                        // 150 魔法数字，如果android拉不起键盘，可以适当加大一点
+                        setTimeout(function(){
+                            controlUI();
+                        }, 150);
+                    }
+                });
+                
+                function controlUI(){
+                    //_input.style.display = 'block';
+                    //btn.style.display = 'none';
+                    $('top_header').style.display = 'none';
+                    document.getElementById('search_bar').className = 'search search_focus search_typing ';
+                    $('search_bar').style.display = '';
+                    $('j_refer').style.display = '';
+                    _input.focus();
+                }
+            })();
+            
+        </script>
+</body>
+</html>
